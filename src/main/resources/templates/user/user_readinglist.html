@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      th:action="@{/searchbook(searchWord=${searchBook.title})}"
+      th:object="${searchBook}"
+      method="GET"
+    >
+      <input type="text" th:value="*{title}" th:name="title" />
+    </form>
+
+    <table>
+      <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Author Name</th>
+        <th>Edition</th>
+        <th>Publisher Name</th>
+        <th>Reviews</th>
+        <th>Genre</th>
+        <th>Rating</th>
+        <th>Actions</th>
+      </tr>
+      <tr th:each="book : ${bookList}">
+        <td>
+          <img
+            th:src="@{${'/bookimages/' + book.id + '.jpg'}}"
+            alt=""
+            height="100px"
+            width="100px"
+          />
+        </td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.edition}"></td>
+        <td th:text="${book.publisherName}"></td>
+        <td th:text="${book.reviewList}"></td>
+        <td th:text="${book.genre}"></td>
+        <td th:text="${book.rating}"></td>
+        <td>
+          <a th:href="@{/user/ReadingList/{id}(id=${book.id})}">Remove</a>
+          <a th:href="@{/viewbook/{id}(id=${book.id})}">Read</a>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="../static/apple-touch-icon.png"
+      th:href="@{apple-touch-icon.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../static/favicon-32x32.png"
+      th:href="@{favicon-32x32.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../static/favicon-16x16.png"
+      th:href="@{favicon-16x16.png}"
+    />
+    <link
+      rel="manifest"
+      href="../static/site.webmanifest"
+      th:href="@{site.webmanifest}"
+    />
+    <link
+      rel="mask-icon"
+      href="../static/safari-pinned-tab.svg"
+      th:href="@{safari-pinned-tab.svg}"
+      color="#5bbad5"
+    />
+    <link
+      rel="shortcut icon"
+      href="../static/favicon.ico"
+      th:href="@{favicon.ico}"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="msapplication-config" content="../static/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/styles.css"
+      th:href="@{/css/styles.css}"
+    />
+    <title>Login</title>
+  </head>
+
+  <body>
+    <div class="myBg-blue pb-5">
+      <div class="container position-relative">
+        <a href="">
+          <div class="d-flex pt-4">
+            <img
+              src="../static/logo-light.png"
+              th:src="@{logo-light.png}"
+              alt="logo"
+              width="48px"
+            />
+            <span class="myText-white fs-4 mx-2 mt-2">Book Club Pro</span>
+          </div>
+        </a>
+        <div class="mb-5">
+          <h1 class="myText-white fw-bold mt-5 fs-1">Book Club Pro</h1>
+          <p class="myText-white fst-italic fs-5 my-2">
+            "Join the reading revolution, Today"
+          </p>
+        </div>
+        <img
+          src="../static/login1.png"
+          th:src="@{login1.png}"
+          alt="book image"
+          width="150px"
+          class="position-absolute top-100 end-50 mt-5"
+          style="margin-right: 17rem"
+        />
+      </div>
+    </div>
+    <div class="container">
+      <div class="w-50 text-end">
+        <img
+          src="../static/login2.png"
+          th:src="@{login2.png}"
+          alt="book image"
+          width="200px"
+          class="mt-5 me-5"
+        />
+      </div>
+    </div>
+    <div class="position-relative ms-5">
+      <div
+        class="position-absolute bottom-50 start-50 myBg-white py-4 px-5 rounded-5 shadow-sm"
+      >
+        <p>Welcome to Book Club Pro</p>
+        <h2 class="mt-5">Login</h2>
+        <form class="mt-3" th:action="@{/login}" th:object="${p}" method="POST">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Enter you username or email</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              placeholder="Username or Email"
+              required
+              th:value="*{email}"
+              name="email"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+              th:field="*{password}"
+              required
+            />
+          </div>
+          <div class="text-end mb-3">
+            <a href="#" class="myLink">Forgot Password</a>
+          </div>
+          <button type="submit" class="myBtn-lg">Login</button>
+          <p class="my-3">
+            Not have an account?
+            <a href="#" class="myLink">Sign Up</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
