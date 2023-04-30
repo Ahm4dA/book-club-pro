@@ -292,6 +292,16 @@ public class AppController {
         return "redirect:/user/ReadingList";
     }
 
+    @GetMapping("/addmore")
+    public String addMoreGetMap(Model model) {
+
+        Book searchBook = new Book();
+
+        model.addAttribute("searchBook", searchBook);
+
+        return "addmore.html";
+    }
+
     @GetMapping("/club")
     public String clubHomepageGetMap(Model model) {
 
