@@ -1,5 +1,6 @@
 package com.sdaproject.bookclubpro.Serivce;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sdaproject.bookclubpro.Entity.Person;
@@ -10,6 +11,7 @@ public class PersonService {
 
     private PersonRepository personRepository;
 
+    @Autowired
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }

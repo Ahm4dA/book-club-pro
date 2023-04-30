@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.IntToLongFunction;
 import java.util.function.ToLongFunction;
 
@@ -24,11 +25,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sdaproject.bookclubpro.Entity.Book;
+import com.sdaproject.bookclubpro.Entity.Club;
 import com.sdaproject.bookclubpro.Entity.Genre;
 import com.sdaproject.bookclubpro.Entity.Person;
 import com.sdaproject.bookclubpro.Entity.ReadingList;
 import com.sdaproject.bookclubpro.Repository.BookRepository;
 import com.sdaproject.bookclubpro.Serivce.BookService;
+import com.sdaproject.bookclubpro.Serivce.ClubService;
 import com.sdaproject.bookclubpro.Serivce.PersonService;
 
 @Controller
@@ -37,10 +40,12 @@ public class AppController {
     private Person verificatonPerson;
     private PersonService personService;
     private BookService bookService;
+    private ClubService clubService;
 
-    public AppController(PersonService personService, BookService bookService) {
+    public AppController(PersonService personService, BookService bookService, ClubService clubService) {
         this.personService = personService;
         this.bookService = bookService;
+        this.clubService = clubService;
     }
 
     private boolean ifVerified(Person p) {
@@ -308,7 +313,21 @@ public class AppController {
         // here we check if user is already in some club, if yes go to club homepage, if
         // not go to create club
 
-        return "create_club";
+        List<Club> nClub = clubService.findByName("Ahmad's Club");
+        System.out.println("Genre : " + nClub.get(0).getGenreList().get(0));
+        // Date date = new Date();
+        // List<Genre> ll = new ArrayList<Genre>();
+
+        // ll.add(Genre.Comic);
+
+        // nClub.setName("Ahmad's Club");
+        // nClub.setCreationDate(date);
+        // nClub.setTagline("Books for all");
+        // nClub.setGenreList(ll);
+
+        // clubService.createClub(nClub);
+
+        return "club/create_club.html";
     }
 
 }
