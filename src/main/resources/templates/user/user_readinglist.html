@@ -57,7 +57,7 @@
     <link
       rel="stylesheet"
       href="src/main/resources/static/css/styles.css"
-      th:src="@{/css/styles.css}"
+      th:href="@{/css/styles.css}"
     />
     <title>Reading List</title>
   </head>
@@ -68,8 +68,8 @@
         <a class="navbar-brand me-5" href="#">
           <div class="d-flex">
             <img
-              src="/src/main/resources/static/logo/logo-dark.png"
-              th:src="@{/logo/logo-dark.png}"
+              src="/src/main/resources/static/logo-dark.png"
+              th:src="@{/logo-dark.png}"
               alt="logo"
               width="48px"
             />
@@ -101,7 +101,13 @@
               <a class="myLink" href="#">Competition</a>
             </li>
           </ul>
-          <form class="d-flex me-3" role="search">
+          <form
+            class="d-flex me-3"
+            role="search"
+            th:action="@{/searchbook(searchWord=${searchBook.title})}"
+            th:object="${searchBook}"
+            method="GET"
+          >
             <div class="input-group">
               <input
                 type="text"
@@ -109,6 +115,8 @@
                 placeholder="Search By Name"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
+                th:value="*{title}"
+                th:name="title"
               />
               <a href="#" class="input-group-text"
                 ><box-icon name="search"></box-icon
@@ -138,8 +146,8 @@
             </div>
             <div class="col-md-4 p-1">
               <img
-                src="/src/main/resources/static/img/readingList.png"
-                th:src="@{/img/readingList.png}"
+                src="/src/main/resources/static/readingList.png"
+                th:src="@{/readingList.png}"
                 alt="Book Reading"
                 width="450px"
               />
@@ -161,62 +169,27 @@
                 th:src="@{${'/bookimages/' + book.id + '.jpg'}}"
                 class="card-img-top"
                 alt=""
+                height="300px"
               />
               <div class="card-body">
                 <h5 class="card-title myText-blue" th:text="${book.title}"></h5>
                 <div class="my-2">
-                  <p class="mb-0" th:text="${book.edition}"></p>
-                  <p class="mb-0" th:text="${book.genre}">Genre:</p>
                   <p class="mb-0" th:text="${book.author}">Author:</p>
                   <p class="mb-0" th:text="${book.publisherName}">Publisher:</p>
+                  <p class="mb-0" th:text="${book.edition}"></p>
+                  <p class="mb-0" th:text="${book.genre}"></p>
                 </div>
-                <a href="./artistInfo.html" class="myBtn">Read</a>
-                <a href="./artistInfo.html" class="btn btn-danger">Delete</a>
+                <a th:href="@{/viewbook/{id}(id=${book.id})}" class="myBtn"
+                  >Read</a
+                >
+                <a
+                  th:href="@{/user/ReadingList/{id}(id=${book.id})}"
+                  class="btn btn-danger"
+                  >Delete</a
+                >
               </div>
             </div>
           </div>
-          <!-- <div class="col-md-3">
-            <div class="card myBg-Light" style="width: 15rem">
-              <img
-                src="/src/main/resources/static/img/book2.png"
-                th:src="@{/img/book2.png}"
-                class="card-img-top"
-                alt="Asking Alexanderia"
-              />
-              <div class="card-body">
-                <h5 class="card-title myText-blue">In Cold Blood</h5>
-                <div class="my-2">
-                  <p class="mb-0">Edition: 1st</p>
-                  <p class="mb-0">Genre: Science Fiction</p>
-                  <p class="mb-0">Author: Lead Ahmad</p>
-                  <p class="mb-0">Publisher: XYZ</p>
-                </div>
-                <a href="./artistInfo.html" class="myBtn">Read</a>
-                <a href="./artistInfo.html" class="btn btn-danger">Delete</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card myBg-Light" style="width: 15rem">
-              <img
-                src="/src/main/resources/static/img/book3.png"
-                th:src="@{/img/book3.png}"
-                class="card-img-top"
-                alt="Asking Alexanderia"
-              />
-              <div class="card-body">
-                <h5 class="card-title myText-blue">Prisoner of Azkaban</h5>
-                <div class="my-2">
-                  <p class="mb-0">Edition: 1st</p>
-                  <p class="mb-0">Genre: Science Fiction</p>
-                  <p class="mb-0">Author: Lead Ahmad</p>
-                  <p class="mb-0">Publisher: XYZ</p>
-                </div>
-                <a href="./artistInfo.html" class="myBtn">Read</a>
-                <a href="./artistInfo.html" class="btn btn-danger">Delete</a>
-              </div>
-            </div>
-          </div> -->
         </div>
       </section>
     </main>
