@@ -95,17 +95,31 @@
               <a class="myLink" href="#">Competition</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2 myBorder"
-              type="search"
-              placeholder="Find your favorite book"
-              aria-label="Search"
-            />
+          <form
+            class="d-flex me-3"
+            role="search"
+            th:action="@{/searchbook(searchWord=${searchBook.title})}"
+            th:object="${searchBook}"
+            method="GET"
+          >
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search By Name"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                th:value="*{title}"
+                th:name="title"
+              />
+              <a href="#" class="input-group-text"
+                ><box-icon name="search"></box-icon
+              ></a>
+            </div>
           </form>
-          <form th:action="@{/logout}" method="GET">
-            <button class="myBtn-light" type="submit">Logout</button>
-          </form>
+          <a href="./login.html"
+            ><button class="myBtn-light" type="submit">Logout</button></a
+          >
         </div>
       </div>
     </nav>
