@@ -305,6 +305,9 @@ public class AppController {
     @GetMapping("/club")
     public String clubHomepageGetMap(Model model) {
 
+        // here we check if user is already in some club, if yes go to club homepage, if
+        // not go to create club
+
         return "create_club";
     }
 
