@@ -25,4 +25,8 @@ public class ClubService {
     public List<Club> findByName(String name) {
         return clubRepository.findByNameR(name);
     }
+
+    public List<Club> getAllClub() {
+        return clubRepository.findAll();
+    }
 }

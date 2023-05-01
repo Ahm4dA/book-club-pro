@@ -313,21 +313,36 @@ public class AppController {
         // here we check if user is already in some club, if yes go to club homepage, if
         // not go to create club
 
-        List<Club> nClub = clubService.findByName("Ahmad's Club");
-        System.out.println("Genre : " + nClub.get(0).getGenreList().get(0));
-        // Date date = new Date();
-        // List<Genre> ll = new ArrayList<Genre>();
+        Club nClub = new Club();
+        // System.out.println("Genre : " + nClub.get(0).getGenreList().get(0));
+        Date date = new Date();
+        List<Genre> ll = new ArrayList<Genre>();
 
-        // ll.add(Genre.Comic);
+        ll.add(Genre.Comic);
+        ll.add(Genre.Romance);
 
-        // nClub.setName("Ahmad's Club");
-        // nClub.setCreationDate(date);
-        // nClub.setTagline("Books for all");
-        // nClub.setGenreList(ll);
+        nClub.setName("AhmadA Club");
+        nClub.setCreationDate(date);
+        nClub.setTagline("Books for all");
+        nClub.setGenreList(ll);
 
-        // clubService.createClub(nClub);
+        clubService.createClub(nClub);
 
         return "club/create_club.html";
+    }
+
+    @GetMapping("/club/joinclub")
+    public String joinClubGetMap(Model model) {
+
+        List<Club> clubList = clubService.getAllClub();
+
+        model.addAttribute("clubList", clubList);
+
+        Book searchBook = new Book();
+
+        model.addAttribute("searchBook", searchBook);
+
+        return "club/join_club.html";
     }
 
 }
