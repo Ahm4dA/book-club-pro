@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="/src/main/resources/static/apple-touch-icon.png"
+      th:href="@{/apple-touch-icon.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/src/main/resources/static/favicon-32x32.png"
+      th:href="@{/favicon-32x32.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/src/main/resources/static/favicon-16x16.png"
+      th:href="@{/favicon-16x16.png}"
+    />
+    <link
+      rel="manifest"
+      href="/src/main/resources/static/site.webmanifest"
+      th:href="@{/site.webmanifest}"
+    />
+    <link
+      rel="mask-icon"
+      href="/src/main/resources/static/safari-pinned-tab.svg"
+      th:href="@{/safari-pinned-tab.svg}"
+      color="#5bbad5"
+    />
+    <link
+      rel="shortcut icon"
+      href="/src/main/resources/static/favicon.ico"
+      th:href="@{/favicon.ico}"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta
+      name="msapplication-config"
+      content="../../resources/browserconfig.xml"
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/css/bootstrap.css"
+      th:href="@{/css/bootstrap.css}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/css/styles.css"
+      th:href="@{/css/styles.css}"
+    />
+    <title>Create Club</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary container">
+      <div class="container-fluid">
+        <a class="navbar-brand me-5" href="#">
+          <div class="d-flex">
+            <img
+              src="/src/main/resources/static/logo-dark.png"
+              th:src="@{/logo-dark.png}"
+              alt="logo"
+              width="48px"
+            />
+            <span class="myText-blue fs-4 mx-2 mt-2">Book Club Pro</span>
+          </div>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
+            <li class="nav-item mx-3">
+              <a class="myLink active" aria-current="page" href="./club.html"
+                >Club</a
+              >
+            </li>
+            <li class="nav-item mx-3">
+              <a class="myLink" href="#">My Reading</a>
+            </li>
+            <li class="nav-item mx-3">
+              <a class="myLink" href="#">Competition</a>
+            </li>
+            <li class="nav-item mx-3">
+              <a class="myLink" href="#">Publish Book</a>
+            </li>
+          </ul>
+          <form class="d-flex me-3" role="search">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search By Name"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+              />
+              <a href="#" class="input-group-text"
+                ><box-icon name="search"></box-icon
+              ></a>
+            </div>
+          </form>
+          <a href="./login.html"
+            ><button class="myBtn-light" type="submit">Logout</button></a
+          >
+        </div>
+      </div>
+    </nav>
+    <main>
+      <section class="myBg-blue">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-md-10 py-1">
+              <div class="mb-5 pt-5 pe-5">
+                <h1 class="myText-white fw-bold fs-1">Create Club</h1>
+              </div>
+            </div>
+            <div class="col-md-2 p-1">
+              <img
+                src="/src/main/resources/static/home1.png"
+                th:src="@{/home1.png}"
+                alt="Book Reading"
+                width="200px"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container my-4 mb-5">
+        <form class="w-50 mx-auto">
+          <h3 class="fs-3 mb-3">Fill the details</h3>
+          <div class="row justify-content-center my-2">
+            <div class="col-md-12">
+              <div class="wrap w-100 myBg-blue text-white">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label"
+                    >Enter Club Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter Club Name"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label"
+                    >Enter Tag Line</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter Tag Line"
+                  />
+                </div>
+
+                <div class="mb-4 text-center">
+                  <h3>Choose your genre</h3>
+                </div>
+                <ul class="ks-cboxtags p-0 m-0">
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxOne"
+                      value="Order one"
+                      checked
+                    />
+                    <label for="checkboxOne">Fiction</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="checkboxTwo" value="Order Two" />
+                    <label for="checkboxTwo">Non-Fiction</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxThree"
+                      value="Order Two"
+                    />
+                    <label for="checkboxThree">Fantasy</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxFour"
+                      value="Order Two"
+                    />
+                    <label for="checkboxFour">Poetry</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxFive"
+                      value="Order Two"
+                    />
+                    <label for="checkboxFive">Novel</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="checkboxSix" value="Order Two" />
+                    <label for="checkboxSix">Romance</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxSeven"
+                      value="Order Two"
+                    />
+                    <label for="checkboxSeven">Biography</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxEight"
+                      value="Order Two"
+                    />
+                    <label for="checkboxEight">Autobiography</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxNine"
+                      value="Order Two"
+                    />
+                    <label for="checkboxNine">Historic</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="checkboxTen" value="Order Two" />
+                    <label for="checkboxTen">Comic</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxEleven"
+                      value="Order Two"
+                    />
+                    <label for="checkboxEleven">Science Fiction</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxTwelve"
+                      value="Order Two"
+                    />
+                    <label for="checkboxTwelve">Mystery</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxThirdteen"
+                      value="Order Two"
+                    />
+                    <label for="checkboxThirdteen">Crime</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="checkboxFourteen"
+                      value="Order Two"
+                    />
+                    <label for="checkboxFourteen">Humour</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="myBtn w-100 fw-bold">Search</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
