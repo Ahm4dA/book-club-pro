@@ -121,6 +121,11 @@ public class AppController {
         return "login_page"; // change this later accordingly
     }
 
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/login";
+    }
+
     @GetMapping("/login")
     public String loginPageGetMap(Model model) {
 
