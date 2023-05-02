@@ -97,6 +97,11 @@ public class AppController {
         return "login_page";
     }
 
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/login";
+    }
+
     @GetMapping("/signup")
     public String SignupPageGetMap(Model model) {
 
