@@ -6,6 +6,7 @@ import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sdaproject.bookclubpro.Entity.Book;
 
@@ -20,6 +21,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query(value = "SELECT DISTINCT * FROM Book b WHERE b.title LIKE %:word% OR b.publisherName LIKE %:word% OR b.author LIKE %:word%", nativeQuery = true)
     public List<Book> getBookByWord(@Param("word") String word);
 
+    @Transactional
     @Modifying
     @Query(value = "INSERT INTO bookbelongto(userid, bookid) VALUES(:pId, :bId)", nativeQuery = true)
     public int saveBookToPersonR(@Param("pId") Long pId, @Param("bId") Long bId);

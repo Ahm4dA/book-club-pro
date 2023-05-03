@@ -1,5 +1,6 @@
 package com.sdaproject.bookclubpro.Entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class Club {
     // private DiscussionForum discussionForum;
 
     public Club() {
+        genreList = new ArrayList<>();
     }
 
     public Club(String name, String tagline, Date creationDate) {

@@ -117,7 +117,7 @@
               ></a>
             </div>
           </form>
-          <a href="./login.html"
+          <a th:href="@{/logout}"
             ><button class="myBtn-light" type="submit">Logout</button></a
           >
         </div>
@@ -129,13 +129,14 @@
           <div class="row">
             <div class="col-md-8 py-4">
               <div class="mb-5 pt-5 pe-5">
-                <h1 class="myText-white fw-bold fs-1">Club</h1>
-                <p class="myText-white fs-5 my-3">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Sequi delectus cum rerum quod, quis dolores sit, veritatis
-                  minima, porro officia quibusdam nihil iure natus maiores odio
-                  repellendus mollitia illum eum?
-                </p>
+                <h1
+                  class="myText-white fw-bold fs-1"
+                  th:text="${clubData.name}"
+                ></h1>
+                <p
+                  class="myText-white fs-5 my-3"
+                  th:text="${clubData.tagline}"
+                ></p>
               </div>
             </div>
             <div class="col-md-4 p-1">

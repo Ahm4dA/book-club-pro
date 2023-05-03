@@ -29,4 +29,20 @@ public class ClubService {
     public List<Club> getAllClub() {
         return clubRepository.findAll();
     }
+
+    public void saveMemberOnCreate(Long userid, Long clubid) {
+        clubRepository.saveMemberOnCreate(userid, clubid);
+    }
+
+    public Club getByName(String name) {
+        return clubRepository.getByNameR(name);
+    }
+
+    public List<Long> checkIfUserInClub(Long userid) {
+        return clubRepository.checkIfUserInClubR(userid);
+    }
+
+    public Club getById(Long id) {
+        return clubRepository.getByIdR(id);
+    }
 }

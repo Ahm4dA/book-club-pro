@@ -11,7 +11,6 @@ import com.sdaproject.bookclubpro.Entity.Person;
 import com.sdaproject.bookclubpro.Repository.BookRepository;
 
 @Service
-@Transactional
 public class BookService {
 
     private BookRepository bookRepository;

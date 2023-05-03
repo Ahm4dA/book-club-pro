@@ -32,4 +32,5 @@ public class PersonService {
     public void setPersonType(Long id, int pType) {
         personRepository.setPersonType(id, pType);
     }
+
 }

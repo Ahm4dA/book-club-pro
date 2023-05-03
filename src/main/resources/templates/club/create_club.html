@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -158,235 +158,218 @@
         </div>
       </section>
       <section class="container my-4 mb-5">
-				<form class="w-50 mx-auto">
-					<h3 class="fs-3 mb-3">Fill the details</h3>
-					<div class="row justify-content-center my-2">
-						<div class="col-md-12">
-							<div class="wrap w-100 myBg-blue text-white">
-								<div class="mb-3">
-									<label
-										for="exampleInputEmail1"
-										class="form-label"
-										>Enter Club Name</label
-									>
-									<input
-										type="text"
-										class="form-control"
-										id="exampleInputEmail1"
-										aria-describedby="emailHelp"
-										placeholder="Enter Club Name"
-									/>
-								</div>
-								<div class="mb-3">
-									<label
-										for="exampleInputEmail1"
-										class="form-label"
-										>Enter Tag Line</label
-									>
-									<input
-										type="text"
-										class="form-control"
-										id="exampleInputEmail1"
-										aria-describedby="emailHelp"
-										placeholder="Enter Tag Line"
-									/>
-								</div>
+        <form
+          class="w-50 mx-auto"
+          th:action="@{/club/clubCreated}"
+          th:object="${clubData}"
+          method="POST"
+        >
+          <h3 class="fs-3 mb-3">Fill the details</h3>
+          <div class="row justify-content-center my-2">
+            <div class="col-md-12">
+              <div class="wrap w-100 myBg-blue text-white">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label"
+                    >Enter Club Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter Club Name"
+                    th:value="*{name}"
+                    name="name"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label"
+                    >Enter Tag Line</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter Tag Line"
+                    name="tagline"
+                    th:value="*{tagline}"
+                    required
+                  />
+                </div>
 
-								<div class="mb-4 text-center">
-									<h3>Choose your genre</h3>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre1"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre1"
-											>Fiction</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre2"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre2"
-											>Non-Fiction</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre3"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre3"
-											>Fantasy</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre4"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre4"
-											>Poetry</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre5"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre5"
-											>Novel</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre6"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre6"
-											>Romance</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre7"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre7"
-											>Biography</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre8"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre8"
-											>Autobiography</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre9"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre9"
-											>Historic</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre10"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre10"
-											>Comic</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre11"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre11"
-											>Science Fiction</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre12"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre12"
-											>Mystery</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre13"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre13"
-											>Crime</label
-										>
-									</div>
-									<div class="col-md-4">
-										<input
-											type="checkbox"
-											class="btn-check"
-											id="genre14"
-											autocomplete="off"
-										/>
-										<label
-											class="btn btn-outline-primary"
-											for="genre14"
-											>Humour</label
-										>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<button type="submit" class="myBtn w-100 fw-bold">
-						Search
-					</button>
-				</form>
-			</section>
+                <div class="mb-4 text-center">
+                  <h3>Choose your genre</h3>
+                </div>
+                <div class="row">
+                  <div th:each="gList : ${gList}" class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      th:id="${gList}"
+                      autocomplete="off"
+                      th:name="gList"
+                      th:value="${gList}"
+                    />
+                    <label
+                      class="btn btn-outline-primary"
+                      th:for="${gList}"
+                      th:text="${gList}"
+                      >Fiction</label
+                    >
+                  </div>
+                </div>
+                <!-- <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre2"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre2"
+                      >Non-Fiction</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre3"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre3"
+                      >Fantasy</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre4"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre4"
+                      >Poetry</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre5"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre5"
+                      >Novel</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre6"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre6"
+                      >Romance</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre7"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre7"
+                      >Biography</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre8"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre8"
+                      >Autobiography</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre9"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre9"
+                      >Historic</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre10"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre10"
+                      >Comic</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre11"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre11"
+                      >Science Fiction</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre12"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre12"
+                      >Mystery</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre13"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre13"
+                      >Crime</label
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="genre14"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="genre14"
+                      >Humour</label
+                    >
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="myBtn w-100 fw-bold">Create</button>
+        </form>
+      </section>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
