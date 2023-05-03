@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="/src/main/resources/static/apple-touch-icon.png"
+      th:href="@{/apple-touch-icon.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/src/main/resources/static/favicon-32x32.png"
+      th:href="@{/favicon-32x32.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/src/main/resources/static/favicon-16x16.png"
+      th:href="@{/favicon-16x16.png}"
+    />
+    <link
+      rel="manifest"
+      href="/src/main/resources/static/site.webmanifest"
+      th:href="@{/site.webmanifest}"
+    />
+    <link
+      rel="mask-icon"
+      href="/src/main/resources/static/safari-pinned-tab.svg"
+      th:href="@{/safari-pinned-tab.svg}"
+      color="#5bbad5"
+    />
+    <link
+      rel="shortcut icon"
+      href="/src/main/resources/static/favicon.ico"
+      th:href="@{/favicon.ico}"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="msapplication-config" content="../static/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/css/styles.css"
+      th:href="@{/css/styles.css}"
+    />
+    <title>Home-User</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary container">
+      <div class="container-fluid">
+        <a class="navbar-brand me-5" href="#">
+          <div class="d-flex">
+            <img
+              src="/src/main/resources/static/logo-dark.png"
+              th:src="@{/logo-dark.png}"
+              alt="logo"
+              width="48px"
+            />
+            <span class="myText-blue fs-4 mx-2 mt-2">Book Club Pro</span>
+          </div>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
+            <li class="nav-item mx-4">
+              <a class="myLink active" aria-current="page" href="#">Club</a>
+            </li>
+            <li class="nav-item mx-4">
+              <a class="myLink" href="#">My Reading</a>
+            </li>
+            <li class="nav-item mx-4">
+              <a class="myLink" th:href="@{/competition}">Competition</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2 myBorder"
+              type="search"
+              placeholder="Find your favorite book"
+              aria-label="Search"
+            />
+          </form>
+          <form th:action="@{/logout}" method="GET">
+            <button class="myBtn-light" type="submit">Logout</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div th:each="messages : ${messageList}">
+        <p th:text="${messages.message}"></p>
+      </div>
+      <div>
+        <form
+          th:action="@{/club/discussionforum/postMessage}"
+          th:object="${msg_recent}"
+          method="POST"
+        >
+          <input
+            type="text"
+            th:value="${msg_recent.message}"
+            th:name="message"
+          />
+          <button type="submit" class="myBtn">Search</button>
+        </form>
+      </div>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

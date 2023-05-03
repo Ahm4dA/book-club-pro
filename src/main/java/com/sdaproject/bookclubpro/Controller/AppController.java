@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sdaproject.bookclubpro.Entity.Book;
 import com.sdaproject.bookclubpro.Entity.Club;
 import com.sdaproject.bookclubpro.Entity.Competition;
+import com.sdaproject.bookclubpro.Entity.DiscussionForum;
 import com.sdaproject.bookclubpro.Entity.Genre;
 import com.sdaproject.bookclubpro.Entity.Person;
 import com.sdaproject.bookclubpro.Entity.ReadingList;
@@ -35,7 +36,9 @@ import com.sdaproject.bookclubpro.Repository.BookRepository;
 import com.sdaproject.bookclubpro.Serivce.BookService;
 import com.sdaproject.bookclubpro.Serivce.ClubService;
 import com.sdaproject.bookclubpro.Serivce.CompetitionService;
+import com.sdaproject.bookclubpro.Serivce.DiscussionForumService;
 import com.sdaproject.bookclubpro.Serivce.PersonService;
+import com.sdaproject.bookclubpro.Serivce.personInterestService;
 
 import ch.qos.logback.classic.pattern.DateConverter;
 
@@ -47,13 +50,19 @@ public class AppController {
     private BookService bookService;
     private ClubService clubService;
     private CompetitionService competitionService;
+    private personInterestService pers;
+    private DiscussionForumService discussionForumService;
+    Club myClub;
 
     public AppController(PersonService personService, BookService bookService, ClubService clubService,
-            CompetitionService competitionService) {
+            CompetitionService competitionService, personInterestService pers,
+            DiscussionForumService discussionForumService) {
         this.personService = personService;
         this.bookService = bookService;
         this.clubService = clubService;
         this.competitionService = competitionService;
+        this.pers = pers;
+        this.discussionForumService = discussionForumService;
     }
 
     private boolean ifVerified(Person p) {
@@ -267,9 +276,6 @@ public class AppController {
     @GetMapping("/user/ReadingList/{id}")
     public String deleteUserBookFromList(@PathVariable Long id, Model model) {
 
-        System.out.println("pId : " + verificatonPerson.getId());
-        System.out.println("bId : " + id);
-
         bookService.removeBookFromList(verificatonPerson.getId(), id);
 
         return "redirect:/user/ReadingList";
@@ -361,6 +367,9 @@ public class AppController {
 
                 return "club/create_club.html";
             } else {
+
+                myClub = clubService.getById(clubId.get(0));
+
                 Club clubData = clubService.getById(clubId.get(0));
 
                 model.addAttribute("clubData", clubData);
@@ -427,6 +436,38 @@ public class AppController {
         return "club/join_club.html";
     }
 
+    /* Discussion Forum */
+
+    @GetMapping("/club/discussionforum")
+    public String discussionForumGetMap(Model model) {
+
+        List<DiscussionForum> messageList = discussionForumService.getAllMessages(myClub.getId());
+
+        model.addAttribute("messageList", messageList);
+
+        DiscussionForum msg_recent = new DiscussionForum();
+
+        msg_recent.setClubid(myClub.getId());
+        msg_recent.setUserid(verificatonPerson.getId());
+        msg_recent.setMessage("");
+
+        model.addAttribute("msg_recent", msg_recent);
+
+        return "club/discussion_forum.html";
+    }
+
+    @PostMapping("/club/discussionforum/postMessage")
+    public String PostMessage(@ModelAttribute("msg_recent") DiscussionForum msg_recent, Model model) {
+
+        System.out.print("Msg : " + msg_recent.getMessage());
+        msg_recent.setClubid(myClub.getId());
+        msg_recent.setUserid(verificatonPerson.getId());
+
+        discussionForumService.postMessage(msg_recent);
+
+        return "redirect:/club/discussionforum";
+    }
+
     /* Competition */
 
     @GetMapping("/competition")
@@ -439,7 +480,7 @@ public class AppController {
         // newComp.setStartingDate(new Date());
         // newComp.setEndingDate(new Date());
 
-        competitionService.createCompetition(newComp);
+        // competitionService.createCompetition(newComp);
 
         return "competition/competition_homepage.html";
     }
