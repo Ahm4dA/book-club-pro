@@ -22,17 +22,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sdaproject.bookclubpro.Entity.Book;
 import com.sdaproject.bookclubpro.Entity.Club;
+import com.sdaproject.bookclubpro.Entity.Competition;
 import com.sdaproject.bookclubpro.Entity.Genre;
 import com.sdaproject.bookclubpro.Entity.Person;
 import com.sdaproject.bookclubpro.Entity.ReadingList;
 import com.sdaproject.bookclubpro.Repository.BookRepository;
 import com.sdaproject.bookclubpro.Serivce.BookService;
 import com.sdaproject.bookclubpro.Serivce.ClubService;
+import com.sdaproject.bookclubpro.Serivce.CompetitionService;
 import com.sdaproject.bookclubpro.Serivce.PersonService;
+
+import ch.qos.logback.classic.pattern.DateConverter;
 
 @Controller
 public class AppController {
@@ -41,11 +46,14 @@ public class AppController {
     private PersonService personService;
     private BookService bookService;
     private ClubService clubService;
+    private CompetitionService competitionService;
 
-    public AppController(PersonService personService, BookService bookService, ClubService clubService) {
+    public AppController(PersonService personService, BookService bookService, ClubService clubService,
+            CompetitionService competitionService) {
         this.personService = personService;
         this.bookService = bookService;
         this.clubService = clubService;
+        this.competitionService = competitionService;
     }
 
     private boolean ifVerified(Person p) {
@@ -318,22 +326,91 @@ public class AppController {
         // here we check if user is already in some club, if yes go to club homepage, if
         // not go to create club
 
-        Club nClub = new Club();
-        // System.out.println("Genre : " + nClub.get(0).getGenreList().get(0));
-        Date date = new Date();
-        List<Genre> ll = new ArrayList<Genre>();
+        if (verificatonPerson != null) {
+            List<Long> clubId = clubService.checkIfUserInClub(verificatonPerson.getId());
 
-        ll.add(Genre.Comic);
-        ll.add(Genre.Romance);
+            if (clubId.size() == 0) {
+                Club clubData = new Club();
 
-        nClub.setName("AhmadA Club");
-        nClub.setCreationDate(date);
-        nClub.setTagline("Books for all");
-        nClub.setGenreList(ll);
+                Date d = new Date();
 
-        clubService.createClub(nClub);
+                clubData.setCreationDate(d);
 
-        return "club/create_club.html";
+                model.addAttribute("d", d);
+
+                model.addAttribute("clubData", clubData);
+
+                List<Genre> gList = new ArrayList<>();
+
+                gList.add(Genre.Autobiography);
+                gList.add(Genre.Biography);
+                gList.add(Genre.Comic);
+                gList.add(Genre.Crime);
+                gList.add(Genre.Fantasy);
+                gList.add(Genre.Fiction);
+                gList.add(Genre.Historic);
+                gList.add(Genre.Humour);
+                gList.add(Genre.Mystery);
+                gList.add(Genre.NonFiction);
+                gList.add(Genre.Novel);
+                gList.add(Genre.Poetry);
+                gList.add(Genre.Romance);
+                gList.add(Genre.ScienceFiction);
+
+                model.addAttribute("gList", gList);
+
+                return "club/create_club.html";
+            } else {
+                Club clubData = clubService.getById(clubId.get(0));
+
+                model.addAttribute("clubData", clubData);
+
+                Book searchBook = new Book();
+
+                model.addAttribute("searchBook", searchBook);
+
+                return "club/club_homepage";
+            }
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    @PostMapping("/club/clubCreated")
+    public String clubHomepagePostMap(@RequestParam("gList") List<Genre> gList,
+            @ModelAttribute("clubData") Club clubData, @ModelAttribute("d") Date d, Model model) {
+
+        clubData.setCreationDate(d);
+
+        clubData.setGenreList(gList);
+
+        if (gList.size() == 0) {
+
+            System.out.println("Error here 1");
+
+            Exception ex = new Exception("No Genre selected");
+
+            model.addAttribute("ex", ex);
+
+            return "redirect:/error";
+        } else if (gList.size() > 3) {
+
+            System.out.println("Error here 1");
+
+            Exception ex = new Exception("More than 3 Genre selected");
+
+            model.addAttribute("ex", ex);
+
+            return "redirect:/error";
+        }
+
+        clubService.createClub(clubData);
+
+        clubData = clubService.getByName(clubData.getName());
+
+        clubService.saveMemberOnCreate(verificatonPerson.getId(), clubData.getId());
+
+        return "redirect:/club";
     }
 
     @GetMapping("/club/joinclub")
@@ -350,6 +427,22 @@ public class AppController {
         return "club/join_club.html";
     }
 
+    /* Competition */
+
+    @GetMapping("/competition")
+    public String competitionHomepageGetMap(Model model) {
+
+        Competition newComp = new Competition();
+
+        // newComp.setName("Fictional writers");
+        // newComp.setTagline("eyssir");
+        // newComp.setStartingDate(new Date());
+        // newComp.setEndingDate(new Date());
+
+        competitionService.createCompetition(newComp);
+
+        return "competition/competition_homepage.html";
+    }
 }
 
 /*------------------------------------------------------------------------------------ */
