@@ -1,5 +1,7 @@
 package com.sdaproject.bookclubpro.Serivce;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.sdaproject.bookclubpro.Entity.Competition;
@@ -16,5 +18,9 @@ public class CompetitionService {
 
     public void createCompetition(Competition competition) {
         competitionRepository.save(competition);
+    }
+
+    public List<Competition> getAll() {
+        return competitionRepository.getAll();
     }
 }
