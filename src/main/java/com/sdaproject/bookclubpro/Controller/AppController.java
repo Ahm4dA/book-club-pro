@@ -482,6 +482,16 @@ public class AppController {
 
         clubService.saveMemberOnCreate(verificatonPerson.getId(), clubData.getId());
 
+        // myClub = clubData;
+
+        return "redirect:/club";
+    }
+
+    @GetMapping("/club/join/{id}")
+    public String joinClubNow(@PathVariable("id") Long id, Model model) {
+
+        clubService.saveMemberOnCreate(verificatonPerson.getId(), id);
+
         return "redirect:/club";
     }
 
