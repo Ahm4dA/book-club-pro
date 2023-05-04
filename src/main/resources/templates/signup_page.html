@@ -93,48 +93,8 @@
       </div>
     </div>
     <div class="container">
-      <p class="mt-5">Sign up as</p>
-      <div class="row">
-        <div
-          class="col-md-1 ms-2 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
-        >
-          <a href="" class="myLink">
-            <img
-              src="../../resources/img/user.png"
-              th:src="@{user.png}"
-              alt="user"
-              width="56px"
-            />
-            <p>User</p>
-          </a>
-        </div>
-        <div
-          class="col-md-1 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
-        >
-          <a href="" class="myLink">
-            <img
-              src="../../resources/img/user.png"
-              th:src="@{user.png}"
-              alt="user"
-              width="56px"
-            />
-            <p>Author</p>
-          </a>
-        </div>
-        <div
-          class="col-md-1 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
-        >
-          <a href="" class="myLink">
-            <img
-              src="../../resources/img/user.png"
-              th:src="@{user.png}"
-              alt="user"
-              width="56px"
-            />
-            <p>Publisher</p>
-          </a>
-        </div>
-      </div>
+      <p class="mt-5"></p>
+      <div class="row customPadding"></div>
     </div>
 
     <div class="position-relative ms-5">
@@ -143,7 +103,12 @@
       >
         <p>Welcome to Book Club Pro</p>
         <h2 class="my-2">Sign Up</h2>
-        <form class="mt-2">
+        <form
+          th:action="@{/signup}"
+          method="POST"
+          th:object="${person}"
+          class="mt-2"
+        >
           <div class="mb-2">
             <label for="exampleInputEmail1" class="form-label">Username</label>
             <input
@@ -151,6 +116,8 @@
               class="form-control"
               id="exampleInputEmail1"
               placeholder="Username"
+              th:field="${person.name}"
+              required
             />
           </div>
           <div class="mb-2">
@@ -163,6 +130,8 @@
               id="exampleInputEmail1"
               placeholder="Email"
               aria-describedby="emailHelp"
+              required
+              th:field="${person.email}"
             />
           </div>
           <div class="mb-2">
@@ -174,6 +143,8 @@
               class="form-control"
               id="exampleInputPassword1"
               placeholder="Password"
+              required
+              th:field="${person.password}"
             />
           </div>
           <label for="exampleInputEmail1" class="form-label">Gender</label>
@@ -182,9 +153,10 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
+                name="gender"
                 id="flexRadioDefault1"
                 checked
+                th:value="Male"
               />
               <label class="form-check-label" for="flexRadioDefault1">
                 Male
@@ -194,8 +166,9 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
+                name="gender"
                 id="flexRadioDefault2"
+                th:value="Female"
               />
               <label class="form-check-label" for="flexRadioDefault2">
                 Female
@@ -211,13 +184,13 @@
               class="form-control"
               id="exampleInputEmail1"
               placeholder="Username"
+              th:field="${person.DOB}"
             />
           </div>
-          <div class="row">
-            <div
-              class="col-md-1 ms-2 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
-            >
-              <a href="" class="myLink">
+          <div class="row justify-content-around" width="100%">
+            <p class="mt-5">Sign up as</p>
+            <div class="col-md-1 ms-2 me-5 text-center myText-blue p-2 pt-4">
+              <button name="userButton" type="submit" class="myLink">
                 <img
                   src="../../resources/img/user.png"
                   th:src="@{user.png}"
@@ -225,12 +198,10 @@
                   width="56px"
                 />
                 <p>User</p>
-              </a>
+              </button>
             </div>
-            <div
-              class="col-md-1 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
-            >
-              <a href="" class="myLink">
+            <div class="col-md-1 me-5 text-center myText-blue p-2 pt-4">
+              <button name="authorButton" type="submit" class="myLink">
                 <img
                   src="../../resources/img/user.png"
                   th:src="@{user.png}"
@@ -238,12 +209,10 @@
                   width="56px"
                 />
                 <p>Author</p>
-              </a>
+              </button>
             </div>
-            <div
-              class="col-md-1 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
-            >
-              <a href="" class="myLink">
+            <div class="col-md-1 me-5 text-center myText-blue p-2 pt-4">
+              <button name="publisherButton" type="submit" class="myLink">
                 <img
                   src="../../resources/img/user.png"
                   th:src="@{user.png}"
@@ -251,9 +220,10 @@
                   width="56px"
                 />
                 <p>Publisher</p>
-              </a>
+              </button>
             </div>
           </div>
+          <!-- <button type="submit" class="myBtn-lg">Register</button> -->
           <p class="my-2">
             Already have an account?
             <a th:href="@{/login}" class="myLink">Login</a>

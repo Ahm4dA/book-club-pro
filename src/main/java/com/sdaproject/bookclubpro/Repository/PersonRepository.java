@@ -19,7 +19,9 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query(value = "SELECT TOP 1 p.personType from person p WHERE p.id = ?1", nativeQuery = true)
     public int getTypeR(@Param("id") Long id);
 
-    @Query(value = "UPDATE person p SET p.personType = ?2 WHERE p.id = ?1", nativeQuery = true)
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE person SET personType = ?2 WHERE id = ?1", nativeQuery = true)
     public int setPersonType(@Param("id") Long id, @Param("personType") int personType);
 
     @Transactional

@@ -28,6 +28,24 @@ public class personInterestService {
         pers.save(p);
     }
 
+    public void saveMe(Long userid, List<Genre> gList) {
+
+        personInterest person = new personInterest();
+
+        if (gList.size() >= 1) {
+            person.setGenre1(gList.get(0));
+            if (gList.size() >= 2) {
+                person.setGenre2(gList.get(1));
+                if (gList.size() >= 3) {
+                    person.setGenre3(gList.get(2));
+                }
+            }
+        }
+        person.setUserid(userid);
+
+        pers.save(person);
+    }
+
     public List<Genre> getPersonInterest(Long userid) {
 
         personInterest p = pers.getByIdR(userid);

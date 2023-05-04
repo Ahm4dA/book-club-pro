@@ -57,6 +57,8 @@ a {
     text-decoration: none;
     display: inline-block;
     color: var(--clr-blue);
+    border: none;
+    background: none;
 }
 
 .myLink:hover {
@@ -127,4 +129,11 @@ a {
 
 .maxWidth {
     max-width: 75%;
+}
+
+
+/* ----------------------------- Discussion Forum -------------------------------- */
+
+.customPadding {
+    padding: 10rem;
 }

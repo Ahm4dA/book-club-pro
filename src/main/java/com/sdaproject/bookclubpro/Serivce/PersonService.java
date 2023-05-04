@@ -31,8 +31,6 @@ public class PersonService {
 
     public void savePerson(Person p) {
         personRepository.save(p);
-        p = personRepository.getPersonDataR(p.getEmail(), p.getPassword());
-        personRepository.createInstanceOfPersonInterestWithoutInterest(p.getId());
     }
 
     public void savePersonWithInterest(Person p, List<Genre> interest) {

@@ -158,26 +158,12 @@
         </div>
       </section>
       <section class="container my-4 mb-5">
-        <div class="d-flex">
-          <a
-            th:href="@{/club/joinclub}"
-            class="d-flex align-items-center my-3 ms-auto fs-3"
-            ><box-icon
-              type="solid"
-              name="user-check"
-              class="me-2"
-              size="36px"
-            ></box-icon
-            >Join</a
-          >
-        </div>
         <form
           class="w-50 mx-auto"
-          th:action="@{/club/clubCreated}"
-          th:object="${clubData}"
+          th:action="@{/selectInterest}"
           method="POST"
         >
-          <h3 class="fs-3 mb-3">Fill the details</h3>
+          <!-- <h3 class="fs-3 mb-3">Fill the details</h3>
           <div class="row justify-content-center my-2">
             <div class="col-md-12">
               <div class="wrap w-100 myBg-blue text-white">
@@ -210,7 +196,7 @@
                     th:value="*{tagline}"
                     required
                   />
-                </div>
+                </div> -->
 
                 <div class="mb-4 text-center">
                   <h3>Choose your genre</h3>
@@ -229,7 +215,7 @@
                       class="btn btn-outline-primary"
                       th:for="${gList}"
                       th:text="${gList}"
-                      >Fiction</label
+                      ></label
                     >
                   </div>
                 </div>

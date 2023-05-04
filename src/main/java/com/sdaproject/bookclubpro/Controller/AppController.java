@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.IntToLongFunction;
 import java.util.function.ToLongFunction;
@@ -39,6 +40,7 @@ import com.sdaproject.bookclubpro.Entity.DiscussionForum;
 import com.sdaproject.bookclubpro.Entity.Genre;
 import com.sdaproject.bookclubpro.Entity.Person;
 import com.sdaproject.bookclubpro.Entity.ReadingList;
+import com.sdaproject.bookclubpro.Entity.personInterest;
 import com.sdaproject.bookclubpro.Repository.BookRepository;
 import com.sdaproject.bookclubpro.Serivce.BookService;
 import com.sdaproject.bookclubpro.Serivce.ClubService;
@@ -130,47 +132,93 @@ public class AppController {
     public String SignupPageGetMap(Model model) {
 
         Person person = new Person();
-        int userType = 0;
-
         model.addAttribute("person", person);
+
+        int userType = 0;
         model.addAttribute("userType", userType);
 
         return "signup_page";
     }
 
     @PostMapping("/signup")
-    public String SignupPagePostMap(@ModelAttribute(value = "person") Person person,
-            @ModelAttribute(value = "userType") int userType, Model model) {
+    public String SignupPagePostMap(@ModelAttribute("person") Person person,
+            @RequestParam Map<String, String> requestParams,
+            Model model) {
 
-        if (userType == 1) {
-            // create simple user and save
-        } else if (userType == 2) {
-            // create publisher and save
-        } else if (userType == 3) {
-            // create author and save
-        } else if (userType == 4) {
-            // create judge and save
+        int userType = 1;
+
+        String buttonName = requestParams.keySet().stream().filter(k -> k.endsWith("Button")).findFirst().orElse(null);
+        if (buttonName != null) {
+            if (buttonName.equals("userButton")) {
+                userType = 1;
+            } else if (buttonName.equals("authorButton")) {
+                System.out.println("User : author");
+                userType = 3;
+            } else if (buttonName.equals("publisherButton")) {
+                System.out.println("User : publisher");
+                userType = 2;
+            }
         }
 
-        return "login_page"; // change this later accordingly
+        System.out.println("name : " + person.getName());
+        System.out.println("dob : " + person.getDOB());
+        System.out.println("gender : " + person.getGender());
+        // System.out.println("userType : " + userType);
+
+        personService.savePerson(person);
+
+        verificatonPerson = personService.getPersonData(person);
+
+        personService.setPersonType(verificatonPerson.getId(), userType);
+
+        if (userType == 1) {
+            List<Genre> gList = new ArrayList<>();
+
+            gList.add(Genre.Autobiography);
+            gList.add(Genre.Biography);
+            gList.add(Genre.Comic);
+            gList.add(Genre.Crime);
+            gList.add(Genre.Fantasy);
+            gList.add(Genre.Fiction);
+            gList.add(Genre.Historic);
+            gList.add(Genre.Humour);
+            gList.add(Genre.Mystery);
+            gList.add(Genre.NonFiction);
+            gList.add(Genre.Novel);
+            gList.add(Genre.Poetry);
+            gList.add(Genre.Romance);
+            gList.add(Genre.ScienceFiction);
+
+            model.addAttribute("gList", gList);
+
+            return "selectInterest.html";
+        }
+        return "redirect:/login"; // change this later accordingly
     }
 
-    @Value("${spring.servlet.multipart.max-file-size}")
-    private String maxFileSize;
+    @PostMapping("/selectInterest")
+    public String selectInterestPost(@RequestParam("gList") List<Genre> gList, Model model) {
+
+        pers.saveMe(verificatonPerson.getId(), gList);
+
+        for (int i = 0; i < gList.size(); i++) {
+            System.out.println("Genre " + i + " : " + gList.get(i));
+        }
+
+        if (gList.size() <= 0 || gList.size() > 3) {
+            return "redirect:/selectInterest";
+        }
+        return "redirect:/login";
+    }
 
     @GetMapping("/login")
     public String loginPageGetMap(Model model) {
-
-        System.out.println("maxFileSize : " + maxFileSize);
-        System.out.println("maxFileSize : " + maxFileSize);
-        System.out.println("maxFileSize : " + maxFileSize);
-        System.out.println("maxFileSize : " + maxFileSize);
 
         Person p = new Person();
 
         model.addAttribute("p", p);
 
-        return "login_page";
+        return "login_page.html";
     }
 
     @PostMapping("/login")
