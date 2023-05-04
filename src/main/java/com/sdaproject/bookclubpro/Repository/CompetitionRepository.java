@@ -16,7 +16,7 @@ public interface CompetitionRepository extends JpaRepository<Competition, Long> 
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO competitionLinks VALUES(?1, ?2, ?3)", nativeQuery = true)
+    @Query(value = "INSERT INTO competitionLinks VALUES(?1, ?2, ?3, 0.0)", nativeQuery = true)
     public void uploadComplete(Long userId, Long competitionId, Long bookId);
 
     @Query(value = "SELECT userid from competitionLinks where userid = ?1 and competitionid = ?2", nativeQuery = true)
