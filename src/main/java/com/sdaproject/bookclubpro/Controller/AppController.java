@@ -566,7 +566,7 @@ public class AppController {
         List<Competition> compList = competitionService.getAll();
         Date dateNow = new Date();
         for (int i = 0; i < compList.size(); i++) {
-            if (compList.get(i).getEndingDate().after(dateNow)) {
+            if (dateNow.after(compList.get(i).getEndingDate())) {
                 compList.remove(i);
             }
         }
@@ -661,16 +661,15 @@ public class AppController {
         if (newComp.getStartingDate().compareTo(newComp.getEndingDate()) > 0) {
             return "redirect:/admin/createcompetition";
         }
-
         Date d = new Date();
         judge.setDOB(d);
         judge.setGender("");
-        // personService.savePerson(judge);
-        // judge = personService.getPersonData(judge);
-        // personService.setPersonType(judge.getId(), 4);
-        // newComp.setJudge(judge.getId());
+        personService.savePerson(judge);
+        judge = personService.getPersonData(judge);
+        personService.setPersonType(judge.getId(), 4);
+        newComp.setJudge(judge.getId());
 
-        // competitionService.createCompetition(newComp);
+        competitionService.createCompetition(newComp);
 
         return "redirect:/admin/homepage";
     }
