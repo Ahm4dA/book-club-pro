@@ -1,5 +1,7 @@
 package com.sdaproject.bookclubpro.Controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +13,12 @@ import java.util.Optional;
 import java.util.function.IntToLongFunction;
 import java.util.function.ToLongFunction;
 
+import javax.imageio.ImageIO;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.tomcat.util.file.ConfigurationSource.Resource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
@@ -148,8 +155,16 @@ public class AppController {
         return "login_page"; // change this later accordingly
     }
 
+    @Value("${spring.servlet.multipart.max-file-size}")
+    private String maxFileSize;
+
     @GetMapping("/login")
     public String loginPageGetMap(Model model) {
+
+        System.out.println("maxFileSize : " + maxFileSize);
+        System.out.println("maxFileSize : " + maxFileSize);
+        System.out.println("maxFileSize : " + maxFileSize);
+        System.out.println("maxFileSize : " + maxFileSize);
 
         Person p = new Person();
 
@@ -482,11 +497,55 @@ public class AppController {
 
         // competitionService.createCompetition(newComp);
 
+        String bookTitle = new String();
+        model.addAttribute("bookTitle", bookTitle);
+
         return "competition/competition_homepage.html";
     }
-}
 
-/*------------------------------------------------------------------------------------ */
+    public void convertToJpg(File pdfFile, File jpgFile) throws IOException {
+        PDDocument document = PDDocument.load(pdfFile);
+        PDFRenderer pdfRenderer = new PDFRenderer(document);
+        BufferedImage image = pdfRenderer.renderImageWithDPI(0, 300);
+        ImageIO.write(image, "jpg", jpgFile);
+        document.close();
+    }
+
+    @PostMapping("/upload")
+    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("bookTitle") String bookTitle)
+            throws IOException {
+        // Logic to handle file upload
+        String originalFilename = file.getOriginalFilename();
+        String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+
+        // getting file name
+        Book bk = new Book();
+        bk.setAuthor(verificatonPerson.getName());
+        bk.setEdition("");
+        bk.setGenre(Genre.Biography);
+        bk.setPageCount(Long.valueOf(120));
+        bk.setPublisherName(verificatonPerson.getName());
+        bk.setReviewList("");
+        bk.setTitle(bookTitle);
+        bookService.saveBook(bk);
+
+        Long idGen = bookService.getLastBook();
+        String what = Long.toString(idGen);
+
+        String newFilename = what + extension; // Change the filename here
+        System.out.println("C:/programming files/books/" + newFilename);
+        byte[] fileBytes = file.getBytes();
+        Files.write(Paths.get("C:/programming files/books/" + newFilename),
+                fileBytes);
+
+        File pdfFile = new File("C:/programming files/books/" + newFilename);
+        File jpgFile = new File("C:/programming files/bookimages/" + what + ".jpg");
+        convertToJpg(pdfFile, jpgFile);
+
+        return "redirect:/competition";
+    }
+
+}
 
 /*
  * 0 - admin

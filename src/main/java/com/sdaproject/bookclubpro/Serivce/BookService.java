@@ -46,12 +46,16 @@ public class BookService {
 
         if (g1 != null && g2 != null && g3 != null) {
             return bookRepository.getBookListByGenreR(g1, g2, g3, userid);
-            
+
         } else if (g1 != null && g2 != null) {
             return bookRepository.getBookListByGenreR(g1, g2, userid);
         } else {
             return bookRepository.getBookListByGenreR(g1, userid);
         }
+    }
+
+    public Long getLastBook() {
+        return bookRepository.getLastBookR();
     }
     // public void addBookToUser(Person p, Book b) {
 

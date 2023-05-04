@@ -37,4 +37,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query(value = "SELECT b.* from Book b WHERE (b.genre = ?1 OR b.genre = ?2 OR b.genre = ?3) AND b.id NOT IN(SELECT c.bookid from bookbelongto c WHERE c.userid = ?4);", nativeQuery = true)
     public List<Book> getBookListByGenreR(Genre g1, Genre g2, Genre g3, Long userid);
+
+    @Query(value = "SELECT TOP 1 b.id from Book b order by b.id DESC;", nativeQuery = true)
+    public Long getLastBookR();
 }
