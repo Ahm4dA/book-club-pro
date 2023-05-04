@@ -482,6 +482,16 @@ public class AppController {
 
         clubService.saveMemberOnCreate(verificatonPerson.getId(), clubData.getId());
 
+        // myClub = clubData;
+
+        return "redirect:/club";
+    }
+
+    @GetMapping("/club/join/{id}")
+    public String joinClubNow(@PathVariable("id") Long id, Model model) {
+
+        clubService.saveMemberOnCreate(verificatonPerson.getId(), id);
+
         return "redirect:/club";
     }
 
@@ -536,17 +546,18 @@ public class AppController {
     @GetMapping("/competition")
     public String competitionHomepageGetMap(Model model) {
 
-        Competition newComp = new Competition();
-
-        // newComp.setName("Fictional writers");
-        // newComp.setTagline("eyssir");
-        // newComp.setStartingDate(new Date());
-        // newComp.setEndingDate(new Date());
-
-        // competitionService.createCompetition(newComp);
-
         String bookTitle = new String();
         model.addAttribute("bookTitle", bookTitle);
+
+        List<Competition> compList = competitionService.getAll();
+        Date dateNow = new Date();
+        for (int i = 0; i < compList.size(); i++) {
+            if (compList.get(i).getEndingDate().after(dateNow)) {
+                compList.remove(i);
+            }
+        }
+
+        model.addAttribute("compList", compList);
 
         return "competition/competition_homepage.html";
     }
