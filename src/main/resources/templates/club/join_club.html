@@ -150,6 +150,19 @@
         </div>
       </section>
       <section class="container mt-5">
+        <div class="d-flex">
+          <a
+            th:href="@{/club/joinclub}"
+            class="d-flex align-items-center my-3 ms-auto fs-3"
+            ><box-icon
+              type="solid"
+              name="user-check"
+              class="me-2"
+              size="36px"
+            ></box-icon
+            >Create Club</a
+          >
+        </div>
         <div class="artists row mb-5">
           <div th:each="club : ${clubList}" class="col-md-3">
                 <h5 class="card-title myText-blue" th:text="${club.name}"></h5>
