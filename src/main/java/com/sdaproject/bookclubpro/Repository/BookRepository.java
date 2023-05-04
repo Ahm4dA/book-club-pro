@@ -26,7 +26,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO bookbelongto(userid, bookid) VALUES(:pId, :bId)", nativeQuery = true)
+    @Query(value = "INSERT INTO bookbelongto(userid, bookid ) VALUES(:pId, :bId)", nativeQuery = true)
     public int saveBookToPersonR(@Param("pId") Long pId, @Param("bId") Long bId);
 
     @Query(value = "SELECT b.* from Book b WHERE b.genre = ?1 AND b.id NOT IN(SELECT c.bookid from bookbelongto c WHERE c.userid = ?2);", nativeQuery = true)

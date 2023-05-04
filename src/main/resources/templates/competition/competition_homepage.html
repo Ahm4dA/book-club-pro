@@ -53,7 +53,6 @@
     <link rel="stylesheet" href="./css/styles.css" />
     <title>Competition Home</title>
   </head>
-
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary container">
       <div class="container-fluid">
@@ -127,6 +126,7 @@
             <div class="col-md-2 p-1">
               <img
                 src="../../resources/img/home1.png"
+                th:src="@{/home1.png}"
                 alt="Book Reading"
                 width="200px"
               />
@@ -146,8 +146,8 @@
           </thead>
           <tbody>
             <tr th:each="compList : ${compList}">
-              <td th:text="compList.name"></td>
-              <td th:text="compList.tagline"></td>
+              <td th:text="${compList.name}"></td>
+              <td th:text="${compList.tagline}"></td>
               <td
                 th:text="${#dates.format(compList.endingDate, 'yyyy-MM-dd')}"
               ></td>

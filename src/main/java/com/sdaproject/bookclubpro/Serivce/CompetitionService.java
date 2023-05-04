@@ -23,4 +23,18 @@ public class CompetitionService {
     public List<Competition> getAll() {
         return competitionRepository.getAll();
     }
+
+    public void uploadComplete(Long userId, Long competitionId, Long bookId) {
+        competitionRepository.uploadComplete(userId, competitionId, bookId);
+    }
+
+    public boolean checkIfAlreadyIn(Long userId, Long compId) {
+        Long smh = competitionRepository.checkIfAlreadyIn(userId, compId);
+
+        if (smh == null) {
+            return false;
+        }
+
+        return true;
+    }
 }

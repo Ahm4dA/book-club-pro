@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -57,7 +57,6 @@
     />
     <title>Home-User</title>
   </head>
-
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary container">
       <div class="container-fluid">
@@ -110,25 +109,71 @@
       </div>
     </nav>
     <main>
-      <div th:each="messages : ${messageList}">
-        <p th:text="${messages.message}"></p>
-      </div>
-      <div>
-        <form
-          th:action="@{/club/discussionforum/postMessage}"
-          th:object="${msg_recent}"
-          method="POST"
-        >
-          <input
-            type="text"
-            th:value="${msg_recent.message}"
-            th:name="message"
-          />
-          <button type="submit" class="myBtn">Send</button>
-        </form>
-      </div>
+      <section class="myBg-blue">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-md-10 py-1">
+              <div class="mb-5 pt-5 pe-5">
+                <h1 class="myText-white fw-bold fs-1">Discussion Forum</h1>
+              </div>
+            </div>
+            <div class="col-md-2 p-1">
+              <img
+                src="../../resources/img/discussion.png"
+                th:src="@{/discussion.png}"
+                alt="Book Reading"
+                width="200px"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container my-4 mb-5">
+        <div class="row clearfix">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="chat">
+                <ul class="m-b-0">
+                  <li class="clearfix" th:each="messages : ${messageList}">
+                    <div
+                      class="message other-message float-right"
+                      th:text="${messages.message}"
+                    ></div>
+                  </li>
+                </ul>
+                <div class="chat-message clearfix">
+                  <div class="input-group mb-0">
+                    <form
+                      th:action="@{/club/discussionforum/postMessage}"
+                      th:object="${msg_recent}"
+                      method="POST"
+                      class="container-fluid my-4 w-100"
+                    >
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter text here"
+                          aria-label="Username"
+                          aria-describedby="basic-addon1"
+                          th:value="${msg_recent.message}"
+                          th:name="message"
+                        />
+                        <a href="#" class="input-group-text"
+                          ><box-icon type="solid" name="send"></box-icon
+                        ></a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
       integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"

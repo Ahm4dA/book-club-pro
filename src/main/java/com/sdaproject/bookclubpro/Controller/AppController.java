@@ -214,6 +214,18 @@ public class AppController {
     @GetMapping("/login")
     public String loginPageGetMap(Model model) {
 
+        // Person admin = new Person();
+        // Date d = new Date();
+        // admin.setDOB(d);
+        // admin.setEmail("a@gmail.com");
+        // admin.setGender("Male");
+        // admin.setName("Ahamd");
+        // admin.setPassword("a123");
+
+        // personService.savePerson(admin);
+        // admin = personService.getPersonData(admin);
+        // personService.setPersonType(admin.getId(), 0);
+
         Person p = new Person();
 
         model.addAttribute("p", p);
@@ -362,6 +374,8 @@ public class AppController {
 
     @GetMapping("/searchbook/addbook/{id}")
     public String addBookGetMap(@PathVariable Long id, Model model) {
+
+        System.out.println("bId : " + id);
 
         ReadingList readingList = new ReadingList();
 
@@ -562,6 +576,20 @@ public class AppController {
         return "competition/competition_homepage.html";
     }
 
+    @GetMapping("/competition/participate/{id}")
+    public String participateGetMap(@PathVariable("id") Long id, Model model) {
+
+        compId = id;
+
+        if (competitionService.checkIfAlreadyIn(verificatonPerson.getId(), compId)) {
+            return "redirect:/competition";
+        }
+
+        return "competition/participate.html";
+    }
+
+    private Long compId;
+
     public void convertToJpg(File pdfFile, File jpgFile) throws IOException {
         PDDocument document = PDDocument.load(pdfFile);
         PDFRenderer pdfRenderer = new PDFRenderer(document);
@@ -573,6 +601,7 @@ public class AppController {
     @PostMapping("/upload")
     public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("bookTitle") String bookTitle)
             throws IOException {
+
         // Logic to handle file upload
         String originalFilename = file.getOriginalFilename();
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -591,6 +620,8 @@ public class AppController {
         Long idGen = bookService.getLastBook();
         String what = Long.toString(idGen);
 
+        competitionService.uploadComplete(verificatonPerson.getId(), compId, idGen);
+
         String newFilename = what + extension; // Change the filename here
         System.out.println("C:/programming files/books/" + newFilename);
         byte[] fileBytes = file.getBytes();
@@ -602,6 +633,46 @@ public class AppController {
         convertToJpg(pdfFile, jpgFile);
 
         return "redirect:/competition";
+    }
+
+    @GetMapping("/admin/createcompetition")
+    public String createCompGetMap(Model model) {
+
+        Competition newComp = new Competition();
+
+        model.addAttribute("newComp", newComp);
+
+        Person judge = new Person();
+
+        model.addAttribute("judge", judge);
+
+        return "admin/create_competition.html";
+    }
+
+    @PostMapping("/admin/competitoncreated")
+    public String createCompPostMap(@ModelAttribute("newComp") Competition newComp,
+            @ModelAttribute("judge") Person judge,
+            Model model) {
+
+        int splitI = newComp.getName().indexOf(",");
+        newComp.setName(newComp.getName().substring(0, splitI));
+        judge.setName(judge.getName().substring(splitI + 1));
+
+        if (newComp.getStartingDate().compareTo(newComp.getEndingDate()) > 0) {
+            return "redirect:/admin/createcompetition";
+        }
+
+        Date d = new Date();
+        judge.setDOB(d);
+        judge.setGender("");
+        // personService.savePerson(judge);
+        // judge = personService.getPersonData(judge);
+        // personService.setPersonType(judge.getId(), 4);
+        // newComp.setJudge(judge.getId());
+
+        // competitionService.createCompetition(newComp);
+
+        return "redirect:/admin/homepage";
     }
 
 }
