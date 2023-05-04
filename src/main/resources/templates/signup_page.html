@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="../static/apple-touch-icon.png"
+      th:href="@{apple-touch-icon.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../static/favicon-32x32.png"
+      th:href="@{favicon-32x32.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../static/favicon-16x16.png"
+      th:href="@{favicon-16x16.png}"
+    />
+    <link
+      rel="manifest"
+      href="../static/site.webmanifest"
+      th:href="@{site.webmanifest}"
+    />
+    <link
+      rel="mask-icon"
+      href="../static/safari-pinned-tab.svg"
+      th:href="@{safari-pinned-tab.svg}"
+      color="#5bbad5"
+    />
+    <link
+      rel="shortcut icon"
+      href="../static/favicon.ico"
+      th:href="@{favicon.ico}"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta
+      name="msapplication-config"
+      content="../../resources/browserconfig.xml"
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/styles.css"
+      th:href="@{/css/styles.css}"
+    />
+    <title>Sign-Up</title>
+  </head>
+
+  <body>
+    <div class="myBg-blue pb-5">
+      <div class="container-sm">
+        <a href=""
+          ><div class="d-flex pt-4">
+            <img
+              src="../../resources/logo-light.png"
+              th:src="@{logo-light.png}"
+              alt="logo"
+              width="48px"
+            />
+            <span class="myText-white fs-4 mx-2 mt-2">Book Club Pro</span>
+          </div></a
+        >
+        <div class="d-flex py-5">
+          <div class="">
+            <h1 class="myText-white fw-bold mt-5 fs-1">Book Club Pro</h1>
+            <p class="myText-white fst-italic fs-5 my-2">
+              "Join the reading revolution, Today"
+            </p>
+          </div>
+          <div class="mx-4 mt-5">
+            <img
+              src="../../signup.png"
+              th:src="@{signup.png}"
+              alt="book image"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <p class="mt-5">Sign up as</p>
+      <div class="row">
+        <div
+          class="col-md-1 ms-2 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
+        >
+          <a href="" class="myLink">
+            <img
+              src="../../resources/img/user.png"
+              th:src="@{user.png}"
+              alt="user"
+              width="56px"
+            />
+            <p>User</p>
+          </a>
+        </div>
+        <div
+          class="col-md-1 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
+        >
+          <a href="" class="myLink">
+            <img
+              src="../../resources/img/user.png"
+              th:src="@{user.png}"
+              alt="user"
+              width="56px"
+            />
+            <p>Author</p>
+          </a>
+        </div>
+        <div
+          class="col-md-1 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
+        >
+          <a href="" class="myLink">
+            <img
+              src="../../resources/img/user.png"
+              th:src="@{user.png}"
+              alt="user"
+              width="56px"
+            />
+            <p>Publisher</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-relative ms-5">
+      <div
+        class="position-absolute bottom-0 start-50 myBg-white py-4 px-5 rounded-5 shadow-sm"
+      >
+        <p>Welcome to Book Club Pro</p>
+        <h2 class="my-2">Sign Up</h2>
+        <form class="mt-2">
+          <div class="mb-2">
+            <label for="exampleInputEmail1" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              placeholder="Username"
+            />
+          </div>
+          <div class="mb-2">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              placeholder="Email"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="mb-2">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+            />
+          </div>
+          <label for="exampleInputEmail1" class="form-label">Gender</label>
+          <div class="d-flex mb-2">
+            <div class="form-check me-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+                checked
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                Male
+              </label>
+            </div>
+            <div class="form-check me-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault2"
+              />
+              <label class="form-check-label" for="flexRadioDefault2">
+                Female
+              </label>
+            </div>
+          </div>
+          <div class="mb-2">
+            <label for="exampleInputEmail1" class="form-label"
+              >Birth date</label
+            >
+            <input
+              type="date"
+              class="form-control"
+              id="exampleInputEmail1"
+              placeholder="Username"
+            />
+          </div>
+          <div class="row">
+            <div
+              class="col-md-1 ms-2 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
+            >
+              <a href="" class="myLink">
+                <img
+                  src="../../resources/img/user.png"
+                  th:src="@{user.png}"
+                  alt="user"
+                  width="56px"
+                />
+                <p>User</p>
+              </a>
+            </div>
+            <div
+              class="col-md-1 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
+            >
+              <a href="" class="myLink">
+                <img
+                  src="../../resources/img/user.png"
+                  th:src="@{user.png}"
+                  alt="user"
+                  width="56px"
+                />
+                <p>Author</p>
+              </a>
+            </div>
+            <div
+              class="col-md-1 me-5 text-center myText-blue myBg-light p-2 pt-4 rounded shadow-sm"
+            >
+              <a href="" class="myLink">
+                <img
+                  src="../../resources/img/user.png"
+                  th:src="@{user.png}"
+                  alt="user"
+                  width="56px"
+                />
+                <p>Publisher</p>
+              </a>
+            </div>
+          </div>
+          <p class="my-2">
+            Already have an account?
+            <a th:href="@{/login}" class="myLink">Login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
