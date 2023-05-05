@@ -61,7 +61,7 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary container">
       <div class="container-fluid">
-        <a class="navbar-brand me-5" href="#">
+        <a class="navbar-brand me-5" th:href="@{/user/homepage}">
           <div class="d-flex">
             <img
               src="/src/main/resources/static/logo-dark.png"
@@ -86,13 +86,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
             <li class="nav-item mx-4">
-              <a class="myLink active" aria-current="page" href="#">Club</a>
+              <a class="myLink active" aria-current="page" th:href="@{/club}"
+                >Club</a
+              >
             </li>
             <li class="nav-item mx-4">
-              <a class="myLink" href="#">My Reading</a>
+              <a class="myLink" th:href="@{/user/ReadingList}">My Reading</a>
             </li>
             <li class="nav-item mx-4">
-              <a class="myLink" href="#">Competition</a>
+              <a class="myLink" th:href="@{/competition}">Competition</a>
             </li>
           </ul>
           <form
@@ -181,7 +183,7 @@
           <div
             class="px-5 text-center myText-blue myBg-light pt-4 rounded shadow-sm"
           >
-            <a href="" class="myLink">
+            <a th:href="@{/club}" class="myLink">
               <img
                 src="/src/main/resources/static/list.png"
                 th:src="@{/list.png}"
@@ -189,19 +191,6 @@
                 width="64px"
               />
               <p class="mt-1">Club Details</p>
-            </a>
-          </div>
-          <div
-            class="px-5 text-center myText-blue myBg-light pt-4 rounded shadow-sm"
-          >
-            <a href="" class="myLink">
-              <img
-                src="/src/main/resources/static/rList.png"
-                th:src="@{/rList.png}"
-                alt="user"
-                width="64px"
-              />
-              <p class="mt-1">Publish Book</p>
             </a>
           </div>
         </div>

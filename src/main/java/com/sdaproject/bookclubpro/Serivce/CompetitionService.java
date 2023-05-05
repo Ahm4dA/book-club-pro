@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.sdaproject.bookclubpro.Entity.Book;
 import com.sdaproject.bookclubpro.Entity.Competition;
 import com.sdaproject.bookclubpro.Repository.CompetitionRepository;
 
@@ -36,5 +37,13 @@ public class CompetitionService {
         }
 
         return true;
+    }
+
+    public List<Competition> getByJudge(Long id) {
+        return competitionRepository.getByJudge(id);
+    }
+
+    public void updateScore(Long userid, Long compid, Long bookid, Float score) {
+        competitionRepository.updateScore(userid, compid, bookid, score);
     }
 }

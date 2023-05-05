@@ -273,6 +273,9 @@ public class AppController {
             int userType = personService.getType(verificatonPerson);
 
             if (userType == 1) {
+                Book searchBook = new Book();
+                model.addAttribute("searchBook", searchBook);
+
                 return "user/user_homepage";
             } else {
                 return "redirect:/login";
@@ -320,11 +323,54 @@ public class AppController {
         } else {
 
             if (personService.getType(verificatonPerson) == 4) {
-                return "author/author_homepage";
+                return "judge/judge_homepage";
             } else {
                 return "redirect:/login";
             }
         }
+    }
+
+    @GetMapping("judge/evaluatecompetition")
+    public String evaluateCompGetMap(Model model) {
+
+        List<Competition> compList = competitionService.getByJudge(verificatonPerson.getId());
+
+        model.addAttribute("compList", compList);
+
+        return "judge/judge_competition_list.html";
+    }
+
+    @GetMapping("judge/competition/evaluate/{id}")
+    public String evaluateCompGetMap(@PathVariable("id") Long id, Model model) {
+
+        compIdEval = id;
+
+        List<Book> part = bookService.GetBookByCompId(id);
+
+        model.addAttribute("part", part);
+
+        return "judge/judge_competition_Book_list.html";
+    }
+
+    Long compIdEval;
+    Long bookIdEval;
+
+    @GetMapping("/judge/competition/evaluate/score/{id}")
+    public String scoreBookGetMap(@PathVariable("id") Long id, Model model) {
+
+        bookIdEval = id;
+
+        return "judge/score.html";
+    }
+
+    @PostMapping("/judge/competition/scored")
+    public String scoredPostMap(@RequestParam("score") String score, Model model) {
+
+        Float scoreF = Float.valueOf(score);
+
+        competitionService.updateScore(verificatonPerson.getId(), compIdEval, bookIdEval, scoreF);
+
+        return "redirect:/evaluatecompetition";
     }
 
     @GetMapping("/user/ReadingList")

@@ -57,6 +57,11 @@ public class BookService {
     public Long getLastBook() {
         return bookRepository.getLastBookR();
     }
+
+    public List<Book> GetBookByCompId(Long id) {
+        return bookRepository.GetBookByCompId(id);
+    }
+
     // public void addBookToUser(Person p, Book b) {
 
     // bookRepository.saveBookToRelationTable(p.getId(), b.getId());

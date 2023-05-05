@@ -40,4 +40,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query(value = "SELECT TOP 1 b.id from Book b order by b.id DESC;", nativeQuery = true)
     public Long getLastBookR();
+
+    @Query(value = "SELECT b.* from Book b where b.id IN(SELECT c.bookid from competitionLinks c where c.competitionid = ?1)", nativeQuery = true)
+    public List<Book> GetBookByCompId(Long id);
 }
