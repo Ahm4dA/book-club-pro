@@ -1,5 +1,3 @@
-Sure! Here's the updated markup with the additional step added:
-
 # Book Club Pro
 
 Book Club Pro is a web application built with Spring Boot and Java 20, which connects to a SQL Server database. The application is designed to manage books and their associated information.
