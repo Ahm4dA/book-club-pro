@@ -199,6 +199,10 @@ public class AppController {
     @PostMapping("/selectInterest")
     public String selectInterestPost(@RequestParam("gList") List<Genre> gList, Model model) {
 
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
+
         pers.saveMe(verificatonPerson.getId(), gList);
 
         for (int i = 0; i < gList.size(); i++) {
@@ -333,6 +337,10 @@ public class AppController {
     @GetMapping("judge/evaluatecompetition")
     public String evaluateCompGetMap(Model model) {
 
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
+
         List<Competition> compList = competitionService.getByJudge(verificatonPerson.getId());
 
         model.addAttribute("compList", compList);
@@ -342,6 +350,10 @@ public class AppController {
 
     @GetMapping("judge/competition/evaluate/{id}")
     public String evaluateCompGetMap(@PathVariable("id") Long id, Model model) {
+
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
 
         compIdEval = id;
 
@@ -358,6 +370,10 @@ public class AppController {
     @GetMapping("/judge/competition/evaluate/score/{id}")
     public String scoreBookGetMap(@PathVariable("id") Long id, Model model) {
 
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
+
         bookIdEval = id;
 
         return "judge/score.html";
@@ -365,6 +381,10 @@ public class AppController {
 
     @PostMapping("/judge/competition/scored")
     public String scoredPostMap(@RequestParam("score") String score, Model model) {
+
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
 
         Float scoreF = Float.valueOf(score);
 
@@ -397,6 +417,10 @@ public class AppController {
     @GetMapping("/user/ReadingList/{id}")
     public String deleteUserBookFromList(@PathVariable Long id, Model model) {
 
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
+
         bookService.removeBookFromList(verificatonPerson.getId(), id);
 
         return "redirect:/user/ReadingList";
@@ -412,6 +436,10 @@ public class AppController {
     public String searchBookGetMap(@PathVariable String searchWord, @ModelAttribute("searchBook") Book searchBook,
             Model model) {
 
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
+
         List<Book> searchResultBook = bookService.getBookWhenSearched(searchBook.getTitle());
 
         model.addAttribute("searchResultBook", searchResultBook);
@@ -421,7 +449,9 @@ public class AppController {
     @GetMapping("/searchbook/addbook/{id}")
     public String addBookGetMap(@PathVariable Long id, Model model) {
 
-        System.out.println("bId : " + id);
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
 
         ReadingList readingList = new ReadingList();
 
@@ -442,6 +472,10 @@ public class AppController {
     @GetMapping("/addmore")
     public String addMoreGetMap(Model model) {
 
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
+
         Book searchBook = new Book();
 
         model.addAttribute("searchBook", searchBook);
@@ -451,6 +485,10 @@ public class AppController {
 
     @GetMapping("/club")
     public String clubHomepageGetMap(Model model) {
+
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
 
         // here we check if user is already in some club, if yes go to club homepage, if
         // not go to create club
@@ -512,6 +550,10 @@ public class AppController {
     public String clubHomepagePostMap(@RequestParam("gList") List<Genre> gList,
             @ModelAttribute("clubData") Club clubData, @ModelAttribute("d") Date d, Model model) {
 
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
+
         clubData.setCreationDate(d);
 
         clubData.setGenreList(gList);
@@ -550,6 +592,10 @@ public class AppController {
     @GetMapping("/club/join/{id}")
     public String joinClubNow(@PathVariable("id") Long id, Model model) {
 
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
+
         clubService.saveMemberOnCreate(verificatonPerson.getId(), id);
 
         return "redirect:/club";
@@ -557,6 +603,10 @@ public class AppController {
 
     @GetMapping("/club/joinclub")
     public String joinClubGetMap(Model model) {
+
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
 
         List<Club> clubList = clubService.getAllClub();
 
@@ -573,6 +623,10 @@ public class AppController {
 
     @GetMapping("/club/discussionforum")
     public String discussionForumGetMap(Model model) {
+
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
 
         List<DiscussionForum> messageList = discussionForumService.getAllMessages(myClub.getId());
 
@@ -592,6 +646,10 @@ public class AppController {
     @PostMapping("/club/discussionforum/postMessage")
     public String PostMessage(@ModelAttribute("msg_recent") DiscussionForum msg_recent, Model model) {
 
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
+
         System.out.print("Msg : " + msg_recent.getMessage());
         msg_recent.setClubid(myClub.getId());
         msg_recent.setUserid(verificatonPerson.getId());
@@ -605,6 +663,10 @@ public class AppController {
 
     @GetMapping("/competition")
     public String competitionHomepageGetMap(Model model) {
+
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
 
         String bookTitle = new String();
         model.addAttribute("bookTitle", bookTitle);
@@ -624,6 +686,10 @@ public class AppController {
 
     @GetMapping("/competition/participate/{id}")
     public String participateGetMap(@PathVariable("id") Long id, Model model) {
+
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
 
         compId = id;
 
@@ -684,6 +750,10 @@ public class AppController {
     @GetMapping("/admin/createcompetition")
     public String createCompGetMap(Model model) {
 
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
+
         Competition newComp = new Competition();
 
         model.addAttribute("newComp", newComp);
@@ -699,6 +769,10 @@ public class AppController {
     public String createCompPostMap(@ModelAttribute("newComp") Competition newComp,
             @ModelAttribute("judge") Person judge,
             Model model) {
+
+        if (verificatonPerson == null) {
+            return "redirect:/login";
+        }
 
         int splitI = newComp.getName().indexOf(",");
         newComp.setName(newComp.getName().substring(0, splitI));
